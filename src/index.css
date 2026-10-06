@@ -143,6 +143,8 @@ a:focus-visible,
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: translate3d(0, var(--hero-sky-drift, 0px), 0);
+  will-change: transform;
 }
 
 /* Static stable text: "Vinoth weds Sweatha" (z-index: 2, behind temple group) */
@@ -156,6 +158,8 @@ a:focus-visible,
   flex-direction: column;
   align-items: center;
   pointer-events: none;
+  transform: translate3d(0, var(--hero-text-drift, 0px), 0);
+  will-change: transform;
 }
 
 .hero-title {
@@ -200,17 +204,15 @@ a:focus-visible,
   animation: heroWedsReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
 }
 
-/* Grouped Frame: Temple + Trees (z-index: 3, parallax scrolling effect) */
+/* Grouped Frame: Temple + Trees (z-index: 3, layer container) */
 .hero-scene-frame {
   position: absolute;
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  transform: translate3d(0, calc(-1 * var(--hero-frame-lift, 0px)), 0);
-  will-change: transform;
 }
 
-/* 460ba.webp: Temple Image */
+/* 460ba.webp: Temple Image - Midground parallax layer ascending smoothly over static text */
 .hero-temple {
   position: absolute;
   z-index: 1;
@@ -220,13 +222,13 @@ a:focus-visible,
   height: 78.62%;
   object-fit: fill;
   pointer-events: none;
-  transform: scale(var(--hero-temple-scale, 1));
+  transform: translate3d(0, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
   transform-origin: center bottom;
   will-change: transform;
   filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.28));
 }
 
-/* 3a4ef.webp: Foreground Trees Image - In front of temple within frame */
+/* 3a4ef.webp: Foreground Trees Image - Grounded foreground layer */
 .hero-trees {
   position: absolute;
   z-index: 2;
@@ -236,6 +238,9 @@ a:focus-visible,
   height: 86.21%;
   object-fit: fill;
   pointer-events: none;
+  transform: translate3d(0, calc(-1 * var(--hero-trees-lift, 0px)), 0);
+  transform-origin: center bottom;
+  will-change: transform;
 }
 
 @keyframes heroTextReveal {
@@ -944,6 +949,7 @@ a:focus-visible,
     height: 100%;
     object-fit: cover;
     z-index: 1;
+    transform: translate3d(0, var(--hero-sky-drift, 0px), 0);
   }
 
   .hero-title-track {
@@ -952,6 +958,7 @@ a:focus-visible,
     width: 41.27%;
     height: auto;
     z-index: 2;
+    transform: translate3d(0, var(--hero-text-drift, 0px), 0);
   }
 
   .hero-title span {
@@ -969,7 +976,7 @@ a:focus-visible,
     inset: 0;
     z-index: 3;
     pointer-events: none;
-    transform: translate3d(0, calc(-1 * var(--hero-frame-lift, 0px)), 0);
+    transform: none;
   }
 
   .hero-temple {
@@ -980,7 +987,7 @@ a:focus-visible,
     height: 78.62%;
     object-fit: fill;
     z-index: 1;
-    transform: scale(var(--hero-temple-scale, 1));
+    transform: translate3d(0, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
   }
 
   .hero-trees {
@@ -991,7 +998,7 @@ a:focus-visible,
     height: 86.21%;
     object-fit: fill;
     z-index: 2;
-    transform: none;
+    transform: translate3d(0, calc(-1 * var(--hero-trees-lift, 0px)), 0);
   }
 
   .invite-panel {
