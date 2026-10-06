@@ -4,6 +4,23 @@ import Hero from "./components/wedding/Hero"
 
 const A = "/assets"
 
+const CRITICAL_IMAGES = [
+  `${A}/910e4.webp`,
+  `${A}/460ba.webp`,
+  `${A}/3a4ef.webp`,
+  `${A}/1c4aa.webp`,
+  `${A}/26508.webp`,
+  `${A}/f7387.webp`,
+  `${A}/bbb98.webp`,
+  "/wed.webp",
+  `${A}/60b21.webp`,
+  `${A}/a5887.webp`,
+  `${A}/f19cc.webp`,
+  `${A}/5d972.webp`,
+  `${A}/d20fb.webp`,
+  `${A}/73f55.webp`,
+]
+
 const events = [
   {
     name: "Reception",
@@ -11,8 +28,10 @@ const events = [
     time: "7:00 PM",
     venue: "LR THIRUMANA MAHAL",
     map: "https://maps.app.goo.gl/AvDf5752wuoZitgD8",
-    image: `${A}/bbb98.png`,
+    image: `${A}/bbb98.webp`,
     imageAlt: "A couple celebrating a traditional pre-wedding ceremony",
+    description:
+      "As we celebrate the joyous union of P. Vinoth & S. Sweatha, we cordially invite you, your family, and friends to join us for a wonderful evening filled with warmth, laughter, and festivity.",
   },
   {
     name: "Wedding",
@@ -20,8 +39,10 @@ const events = [
     time: "4:00 AM",
     venue: "Arulmigu Sri Sornapureeswarar Temple, Thenponparappi",
     map: "https://maps.app.goo.gl/CXSaRamM6FaZxT527",
-    image: "/wed.png",
+    image: "/wed.webp",
     imageAlt: "Traditional auspicious wedding ceremony",
+    description:
+      "With sacred mantras and timeless rituals, P. Vinoth & S. Sweatha unite in holy matrimony. We humbly request your presence and divine blessings on this auspicious dawn.",
   },
 ]
 
@@ -34,6 +55,14 @@ export default function App() {
   const [blessingCount, setBlessingCount] = useState(0)
   const templeSectionRef = useRef<HTMLElement>(null)
   const event = events[eventIndex]
+
+  // Preload all critical webp assets on mount for zero fetch latency
+  useEffect(() => {
+    CRITICAL_IMAGES.forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -107,7 +136,7 @@ export default function App() {
         id="invitation"
         aria-labelledby="invite-heading"
       >
-        <img className="ganesha" src={`${A}/73f55.png`} alt="" />
+        <img className="ganesha" src={`${A}/73f55.webp`} alt="" />
         <p className="invite-tamil">|| ஓம் ஸ்ரீ கணேசாய நமஹ ||</p>
         <p className="invite-blessing">
           With the blessings of God and our beloved parents,
@@ -190,7 +219,8 @@ export default function App() {
           <div className="event-grid">
             <div className="event-photo-wrap">
               <img
-                className="event-photo"
+                key={event.image}
+                className="event-photo event-photo-fade"
                 src={event.image}
                 alt={event.imageAlt}
               />
@@ -227,12 +257,7 @@ export default function App() {
                   {event.venue}
                 </span>
               </div>
-              <p>
-                As we celebrate the joyous union of{" "}
-                <strong>P. Vinoth &amp; S. Sweatha</strong>, we cordially invite
-                you, your family, and friends to join us for a wonderful evening
-                filled with warmth, laughter, and festivity.
-              </p>
+              <p>{event.description}</p>
               <a
                 className="button"
                 href={event.map}
@@ -263,21 +288,21 @@ export default function App() {
         ref={templeSectionRef}
         aria-label="Temple illustration"
       >
-        <img className="paper-cloud cloud-one" src={`${A}/42dac.png`} alt="" />
-        <img className="paper-cloud cloud-two" src={`${A}/923f7.png`} alt="" />
+        <img className="paper-cloud cloud-one" src={`${A}/42dac.webp`} alt="" />
+        <img className="paper-cloud cloud-two" src={`${A}/923f7.webp`} alt="" />
         <img
           className="paper-cloud cloud-three"
-          src={`${A}/923f7.png`}
+          src={`${A}/923f7.webp`}
           alt=""
         />
         <img
           className="paper-temple"
-          src={`${A}/a5887.png`}
+          src={`${A}/a5887.webp`}
           alt="A handcrafted temple"
         />
         <img
           className="paper-couple"
-          src={`${A}/f19cc.png`}
+          src={`${A}/f19cc.webp`}
           alt="Bride and groom exchanging garlands"
         />
       </section>
@@ -352,7 +377,7 @@ export default function App() {
           </p>
           <div className="blessing-scene">
             <img
-              src={`${A}/f19cc.png`}
+              src={`${A}/f19cc.webp`}
               alt="Bride and groom exchanging garlands"
             />
             {blessingCount > 0 && (

@@ -271,7 +271,7 @@ a:focus-visible,
   aspect-ratio: 1437 / 2556.656;
   overflow: hidden;
   padding: 0;
-  background: url("/assets/1c4aa.png") center / cover no-repeat;
+  background: url("/assets/1c4aa.webp") center / cover no-repeat;
 }
 
 .ganesha {
@@ -423,7 +423,7 @@ a:focus-visible,
   aspect-ratio: 1437 / 875.719;
   overflow: hidden;
   padding: clamp(2rem, 5vw, 4.5rem);
-  background: url("/assets/26508.png") center / cover;
+  background: url("/assets/26508.webp") center / cover;
 }
 
 .event-card {
@@ -435,7 +435,7 @@ a:focus-visible,
   border-radius: clamp(1.5rem, 3vw, 2.5rem);
   background:
     linear-gradient(rgb(255 255 255 / 92%), rgb(255 250 242 / 94%)),
-    url("/assets/f7387.png") center / cover;
+    url("/assets/f7387.webp") center / cover;
   box-shadow:
     0 18px 50px rgb(45 28 10 / 24%),
     inset 0 0 0 8px rgb(255 255 255 / 45%);
@@ -507,6 +507,21 @@ a:focus-visible,
   border-radius: 0.9rem;
   object-fit: cover;
   transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.event-photo-fade {
+  animation: photo-in 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes photo-in {
+  from {
+    opacity: 0.2;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .event-photo-wrap:hover .event-photo {
@@ -644,7 +659,7 @@ a:focus-visible,
   height: auto;
   aspect-ratio: 1437 / 2556.656;
   overflow: hidden;
-  background: url("/assets/60b21.png") center / cover;
+  background: url("/assets/60b21.webp") center / cover;
 }
 
 .paper-cloud {
@@ -703,7 +718,7 @@ a:focus-visible,
   aspect-ratio: 1437 / 2556.656;
   overflow: hidden;
   padding: 0;
-  background: url("/assets/5d972.png") center / cover;
+  background: url("/assets/5d972.webp") center / cover;
 }
 
 .story-copy {
@@ -787,7 +802,7 @@ a:focus-visible,
   aspect-ratio: 1437 / 898.125;
   min-height: 0;
   padding: 0;
-  background: url("/assets/d20fb.png") center / cover;
+  background: url("/assets/d20fb.webp") center / cover;
 }
 
 .rsvp-copy {

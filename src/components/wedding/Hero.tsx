@@ -69,7 +69,12 @@ export default function Hero() {
   return (
     <section ref={heroRef} className="hero" aria-labelledby="couple-names">
       {/* Sky Background */}
-      <img className="hero-sky" src={`${A}/910e4.png`} alt="" />
+      <img
+        className="hero-sky"
+        src={`${A}/910e4.webp`}
+        alt=""
+        fetchPriority="high"
+      />
 
       {/* Names Track (Sticky & Centered) - Animated cinematically on page load */}
       <div className="hero-title-track">
@@ -80,15 +85,21 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 460ba.png: Temple Image - Ascends upward on scroll toward the names */}
+      {/* 460ba.webp: Temple Image - Ascends upward on scroll toward the names */}
       <img
         className="hero-temple"
-        src={`${A}/460ba.png`}
+        src={`${A}/460ba.webp`}
         alt="Meenakshi Amman temple tower"
+        fetchPriority="high"
       />
 
-      {/* 3a4ef.png: Trees Image - Also ascends upward on scroll */}
-      <img className="hero-trees" src={`${A}/3a4ef.png`} alt="" />
+      {/* 3a4ef.webp: Trees Image - Also ascends upward on scroll */}
+      <img
+        className="hero-trees"
+        src={`${A}/3a4ef.webp`}
+        alt=""
+        fetchPriority="high"
+      />
     </section>
   )
 }
