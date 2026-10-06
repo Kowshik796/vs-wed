@@ -1,0 +1,17 @@
+{
+  "title": "VS - Vinoth Sweatha",
+  "description": "Two Hearts, one journey, one beautiful forever",
+  "robots": {
+    "index": true
+  },
+  "icons": {
+    "icon": "/favicon.png"
+  },
+  "openGraph": {
+    "image": "/assets/bbb98.png"
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
