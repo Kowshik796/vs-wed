@@ -145,26 +145,27 @@ a:focus-visible,
   object-fit: cover;
 }
 
-/* Names Track - Behind the temple while scrolling (z-index: 2) */
+/* Static stable text: "Vinoth weds Sweatha" (z-index: 2, behind temple group) */
 .hero-title-track {
   position: absolute;
   top: 7.63%;
   left: 30.41%;
   z-index: 2;
   width: 41.27%;
-  height: 92.37%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
 }
 
 .hero-title {
-  position: sticky;
-  top: 2vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
   text-align: center;
   filter: drop-shadow(0 4px 22px rgba(0, 0, 0, 0.4));
-  will-change: transform;
 }
 
 .hero-title span {
@@ -199,79 +200,42 @@ a:focus-visible,
   animation: heroWedsReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
 }
 
-/* 460ba.webp: Temple Image - Ascends in front of the names (z-index: 3) */
+/* Grouped Frame: Temple + Trees (z-index: 3, parallax scrolling effect) */
+.hero-scene-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  transform: translate3d(0, calc(-1 * var(--hero-frame-lift, 0px)), 0);
+  will-change: transform;
+}
+
+/* 460ba.webp: Temple Image */
 .hero-temple {
   position: absolute;
-  z-index: 3;
+  z-index: 1;
   top: 23.37%;
   left: 13.21%;
   width: 75.99%;
   height: 78.62%;
   object-fit: fill;
   pointer-events: none;
-  transform: translate3d(0, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
+  transform: scale(var(--hero-temple-scale, 1));
   transform-origin: center bottom;
   will-change: transform;
   filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.28));
 }
 
-/* 3a4ef.webp: Foreground Trees Image - In front of temple (z-index: 4) */
+/* 3a4ef.webp: Foreground Trees Image - In front of temple within frame */
 .hero-trees {
   position: absolute;
-  z-index: 4;
+  z-index: 2;
   top: 35.88%;
   left: -0.21%;
   width: 100.42%;
   height: 86.21%;
   object-fit: fill;
   pointer-events: none;
-  transform: translate3d(0, calc(-1 * var(--hero-trees-lift, 0px)), 0);
-  transform-origin: center bottom;
-  will-change: transform;
-}
-
-.hero-title {
-  position: sticky;
-  top: 2vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  text-align: center;
-  filter: drop-shadow(0 4px 22px rgba(0, 0, 0, 0.4));
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.hero-title span {
-  font-family: "Asul:Regular", serif;
-  font-size: clamp(2.4rem, 10.2cqw, 8.4rem);
-  line-height: 0.98;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: #ffffff;
-  opacity: 0;
-  transform: translateY(26px) scale(0.95);
-  animation: heroTextReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.hero-title span.groom {
-  animation-delay: 0.15s;
-}
-
-.hero-title span.bride {
-  animation-delay: 0.85s;
-}
-
-.hero-title em {
-  font-family: "Birthstone Bounce:Medium", cursive;
-  font-size: clamp(1.8rem, 6.8cqw, 5.6rem);
-  font-style: normal;
-  line-height: 1.15;
-  white-space: nowrap;
-  color: #ffffff;
-  opacity: 0;
-  transform: scale(0.85);
-  animation: heroWedsReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
 }
 
 @keyframes heroTextReveal {
@@ -986,7 +950,7 @@ a:focus-visible,
     top: 7.63%;
     left: 30.41%;
     width: 41.27%;
-    height: 92.37%;
+    height: auto;
     z-index: 2;
   }
 
@@ -1000,6 +964,14 @@ a:focus-visible,
     line-height: 8.98cqw;
   }
 
+  .hero-scene-frame {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    transform: translate3d(0, calc(-1 * var(--hero-frame-lift, 0px)), 0);
+  }
+
   .hero-temple {
     top: 23.37%;
     left: 13.21%;
@@ -1007,8 +979,8 @@ a:focus-visible,
     width: 75.99%;
     height: 78.62%;
     object-fit: fill;
-    z-index: 3;
-    transform: translate3d(0, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
+    z-index: 1;
+    transform: scale(var(--hero-temple-scale, 1));
   }
 
   .hero-trees {
@@ -1018,8 +990,8 @@ a:focus-visible,
     width: 100.42%;
     height: 86.21%;
     object-fit: fill;
-    z-index: 4;
-    transform: translate3d(0, calc(-1 * var(--hero-trees-lift, 0px)), 0);
+    z-index: 2;
+    transform: none;
   }
 
   .invite-panel {

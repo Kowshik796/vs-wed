@@ -29,10 +29,8 @@ export default function Hero() {
           // Smooth cubic ease curve
           const easedProgress = 1 - Math.pow(1 - rawProgress, 3)
 
-          // Temple ascends upward in front of hero names (text goes behind temple)
-          const templeLift = easedProgress * (heroHeight * 0.16)
-          // Trees stay grounded to seamlessly meet page 2 garland with zero gap
-          const treesLift = easedProgress * (heroHeight * 0.04)
+          // Grouped frame parallax lift: temple + trees ascend together over static text
+          const frameLift = easedProgress * (heroHeight * 0.16)
           const templeScale = 1 + easedProgress * 0.025
 
           hero.style.setProperty(
@@ -40,14 +38,10 @@ export default function Hero() {
             rawProgress.toFixed(4),
           )
           hero.style.setProperty(
-            "--hero-temple-lift",
-            `${templeLift.toFixed(2)}px`,
+            "--hero-frame-lift",
+            `${frameLift.toFixed(2)}px`,
           )
           hero.style.setProperty("--hero-temple-scale", templeScale.toFixed(4))
-          hero.style.setProperty(
-            "--hero-trees-lift",
-            `${treesLift.toFixed(2)}px`,
-          )
 
           ticking = false
         })
@@ -75,7 +69,7 @@ export default function Hero() {
         fetchPriority="high"
       />
 
-      {/* Names Track (Sticky & Centered) - Animated cinematically on page load */}
+      {/* Static Stable Text: Vinoth weds Sweatha (behind temple group when scrolling) */}
       <div className="hero-title-track">
         <div className="hero-title" id="couple-names">
           <span className="hero-name groom">Vinoth</span>
@@ -84,21 +78,24 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 460ba.webp: Temple Image - Ascends upward on scroll toward the names */}
-      <img
-        className="hero-temple"
-        src={`${A}/460ba.webp`}
-        alt="Meenakshi Amman temple tower"
-        fetchPriority="high"
-      />
+      {/* Grouped Frame: Temple + Trees (Parallax scroll effect in front of static text) */}
+      <div className="hero-scene-frame">
+        {/* 460ba.webp: Temple Image */}
+        <img
+          className="hero-temple"
+          src={`${A}/460ba.webp`}
+          alt="Meenakshi Amman temple tower"
+          fetchPriority="high"
+        />
 
-      {/* 3a4ef.webp: Trees Image - Also ascends upward on scroll */}
-      <img
-        className="hero-trees"
-        src={`${A}/3a4ef.webp`}
-        alt=""
-        fetchPriority="high"
-      />
+        {/* 3a4ef.webp: Foreground Trees Image */}
+        <img
+          className="hero-trees"
+          src={`${A}/3a4ef.webp`}
+          alt=""
+          fetchPriority="high"
+        />
+      </div>
     </section>
   )
 }
