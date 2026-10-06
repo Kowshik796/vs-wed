@@ -32,10 +32,10 @@ export default function Hero() {
 
           // MULTIPLANE DIFFERENTIAL PARALLAX (distinct speeds per depth plane):
           // 1. Text floats stably in upper viewport during initial scroll before temple reaches it
-          const textDrift = Math.min(scrollDistance * 0.65, heroHeight * 0.16)
+          const textDrift = Math.min(scrollDistance * 0.68, heroHeight * 0.16)
 
-          // 2. Temple ascends smoothly in midground with majestic depth over static text
-          const templeLift = easedProgress * Math.min(heroHeight * 0.09, 120)
+          // 2. Temple ascends smoothly in midground with majestic depth over static text (calibrated to maintain solid overlap with trees)
+          const templeLift = easedProgress * Math.min(heroHeight * 0.065, 80)
           const templeScale = 1 + easedProgress * 0.02
 
           // 3. Foreground trees stay grounded, seamlessly meeting the next section (#invitation)

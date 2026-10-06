@@ -219,8 +219,9 @@ a:focus-visible,
   top: 23.37%;
   left: 13.21%;
   width: 75.99%;
-  height: 78.62%;
-  object-fit: fill;
+  height: 89%;
+  object-fit: cover;
+  object-position: top center;
   pointer-events: none;
   transform: translate3d(0, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
   transform-origin: center bottom;
@@ -984,8 +985,9 @@ a:focus-visible,
     left: 13.21%;
     bottom: auto;
     width: 75.99%;
-    height: 78.62%;
-    object-fit: fill;
+    height: 89%;
+    object-fit: cover;
+    object-position: top center;
     z-index: 1;
     transform: translate3d(0, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
   }
