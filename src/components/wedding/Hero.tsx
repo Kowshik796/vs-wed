@@ -19,8 +19,8 @@ export default function Hero() {
           const scrollDistance = Math.max(0, -rect.top)
           const heroHeight = rect.height || 1000
 
-          // Active range: complete the full upward scroll within a natural scroll distance
-          const activeRange = Math.min(window.innerHeight * 0.75, 550)
+          // Active range: complete the upward scroll within natural scrolling
+          const activeRange = Math.min(window.innerHeight * 0.75, 480)
           const rawProgress = Math.min(
             1,
             Math.max(0, scrollDistance / activeRange),
@@ -29,11 +29,10 @@ export default function Hero() {
           // Smooth easeOutCubic curve for cinematic transition
           const easedProgress = 1 - Math.pow(1 - rawProgress, 3)
 
-          // FULL scroll-up effect up to the hero section name:
-          // 1. Temple (460ba.png) ascends all the way up to the hero names
-          const templeLift = easedProgress * (heroHeight * 0.22)
-          // 2. Trees (3a4ef.png) ascends all the way up to the hero names
-          const treesLift = easedProgress * (heroHeight * 0.3)
+          // FULL scroll-up effect: Temple ascends upward in front of the names
+          const templeLift = easedProgress * (heroHeight * 0.28)
+          // Trees ascend upward
+          const treesLift = easedProgress * (heroHeight * 0.25)
           const templeScale = 1 + easedProgress * 0.04
 
           hero.style.setProperty(

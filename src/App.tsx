@@ -386,18 +386,40 @@ export default function App() {
                 key={blessingCount}
                 aria-hidden="true"
               >
-                {Array.from({ length: 24 }, (_, index) => (
-                  <i
-                    key={index}
-                    style={
-                      {
-                        "--petal-left": `${(index * 37) % 100}%`,
-                        "--petal-delay": `${(index % 8) * 90}ms`,
-                        "--petal-drift": `${((index % 5) - 2) * 14}px`,
-                      } as CSSProperties
-                    }
-                  />
-                ))}
+                {Array.from({ length: 75 }, (_, index) => {
+                  const colors = [
+                    "#e35b82",
+                    "#f3c45d",
+                    "#f7a6b9",
+                    "#ff4d6d",
+                    "#ffd166",
+                    "#fff0f3",
+                    "#ff758f",
+                  ]
+                  const left = `${((index * 17) % 96) + 2}%`
+                  const delay = `${(index * 42) % 3200}ms`
+                  const duration = `${3200 + ((index * 97) % 2400)}ms`
+                  const drift = `${((index * 23) % 80) - 40}px`
+                  const size = `${8 + ((index * 7) % 8)}px`
+                  const bg = colors[index % colors.length]
+                  const rot = `${360 + ((index * 47) % 540)}deg`
+                  return (
+                    <i
+                      key={index}
+                      style={
+                        {
+                          "--petal-left": left,
+                          "--petal-delay": delay,
+                          "--petal-duration": duration,
+                          "--petal-drift": drift,
+                          "--petal-size": size,
+                          "--petal-bg": bg,
+                          "--petal-rot": rot,
+                        } as CSSProperties
+                      }
+                    />
+                  )
+                })}
               </div>
             )}
           </div>
