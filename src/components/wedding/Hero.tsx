@@ -34,9 +34,9 @@ export default function Hero() {
           // 1. Text floats stably in upper viewport during initial scroll before temple reaches it
           const textDrift = Math.min(scrollDistance * 0.68, heroHeight * 0.16)
 
-          // 2. Temple ascends smoothly in midground with majestic depth over static text (calibrated to maintain solid overlap with trees)
-          const templeLift = easedProgress * Math.min(heroHeight * 0.065, 80)
-          const templeScale = 1 + easedProgress * 0.02
+          // 2. Temple and foreground trees stay perfectly united at base (zero gap, uncropped original image)
+          const templeLift = 0
+          const templeScale = 1
 
           // 3. Foreground trees stay grounded, seamlessly meeting the next section (#invitation)
           const treesLift = 0
