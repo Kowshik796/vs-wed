@@ -123,10 +123,7 @@ a:focus-visible,
   container-type: inline-size;
   position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 680px;
-  max-height: 980px;
-  aspect-ratio: auto;
+  aspect-ratio: 1437 / 2530;
   overflow: clip;
   isolation: isolate;
   background: #078bea;
@@ -151,12 +148,11 @@ a:focus-visible,
 /* Names Track - Behind the temple while scrolling (z-index: 2) */
 .hero-title-track {
   position: absolute;
-  top: 7vh;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 7.63%;
+  left: 30.41%;
   z-index: 2;
-  width: 90%;
-  max-width: 600px;
+  width: 41.27%;
+  height: 92.37%;
 }
 
 .hero-title {
@@ -168,12 +164,12 @@ a:focus-visible,
   color: white;
   text-align: center;
   filter: drop-shadow(0 4px 22px rgba(0, 0, 0, 0.4));
-  transition: transform 0.3s ease, filter 0.3s ease;
+  will-change: transform;
 }
 
 .hero-title span {
   font-family: "Asul:Regular", serif;
-  font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+  font-size: clamp(2.4rem, 10.2cqw, 8.4rem);
   line-height: 0.98;
   text-transform: uppercase;
   white-space: nowrap;
@@ -193,7 +189,7 @@ a:focus-visible,
 
 .hero-title em {
   font-family: "Birthstone Bounce:Medium", cursive;
-  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  font-size: clamp(1.8rem, 6.8cqw, 5.6rem);
   font-style: normal;
   line-height: 1.15;
   white-space: nowrap;
@@ -207,17 +203,15 @@ a:focus-visible,
 .hero-temple {
   position: absolute;
   z-index: 3;
-  bottom: 0;
-  left: 50%;
-  width: min(85vw, 640px);
-  height: min(74vh, 620px);
+  top: 23.37%;
+  left: 13.21%;
+  width: 75.99%;
+  height: 78.62%;
   object-fit: fill;
-  object-position: center bottom;
   pointer-events: none;
-  transform: translate3d(-50%, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
+  transform: translate3d(0, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
   transform-origin: center bottom;
   will-change: transform;
-  transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.2, 1);
   filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.28));
 }
 
@@ -225,17 +219,15 @@ a:focus-visible,
 .hero-trees {
   position: absolute;
   z-index: 4;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: min(42vh, 360px);
+  top: 35.88%;
+  left: -0.21%;
+  width: 100.42%;
+  height: 86.21%;
   object-fit: fill;
-  object-position: center bottom;
   pointer-events: none;
   transform: translate3d(0, calc(-1 * var(--hero-trees-lift, 0px)), 0);
   transform-origin: center bottom;
   will-change: transform;
-  transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .hero-title {
@@ -976,10 +968,9 @@ a:focus-visible,
 
 @media (max-width: 760px) {
   .hero {
-    height: 100svh;
-    min-height: 580px;
-    max-height: 840px;
-    aspect-ratio: auto;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 401.205 / 706.454;
   }
 
   .hero-sky {
@@ -988,47 +979,47 @@ a:focus-visible,
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 1;
   }
 
   .hero-title-track {
-    top: 6svh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    height: auto;
+    top: 7.63%;
+    left: 30.41%;
+    width: 41.27%;
+    height: 92.37%;
     z-index: 2;
   }
 
   .hero-title span {
-    font-size: clamp(2rem, 11vw, 3.2rem);
-    line-height: 1;
+    font-size: 9.26cqw;
+    line-height: 8.98cqw;
   }
 
   .hero-title em {
-    font-size: clamp(1.6rem, 7.5vw, 2.4rem);
-    line-height: 1.1;
+    font-size: 5.98cqw;
+    line-height: 8.98cqw;
   }
 
   .hero-temple {
-    bottom: 0;
-    left: 50%;
-    top: auto;
-    width: 92%;
-    height: 68svh;
+    top: 23.37%;
+    left: 13.21%;
+    bottom: auto;
+    width: 75.99%;
+    height: 78.62%;
     object-fit: fill;
-    transform: translate3d(-50%, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
     z-index: 3;
+    transform: translate3d(0, calc(-1 * var(--hero-temple-lift, 0px)), 0) scale(var(--hero-temple-scale, 1));
   }
 
   .hero-trees {
-    bottom: 0;
-    left: 0;
-    top: auto;
-    width: 100%;
-    height: 40svh;
+    top: 35.88%;
+    left: -0.21%;
+    bottom: auto;
+    width: 100.42%;
+    height: 86.21%;
     object-fit: fill;
-    transform: translate3d(0, calc(-1 * var(--hero-trees-lift, 0px)), 0);
     z-index: 4;
+    transform: translate3d(0, calc(-1 * var(--hero-trees-lift, 0px)), 0);
   }
 
   .invite-panel {

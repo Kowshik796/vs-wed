@@ -19,21 +19,21 @@ export default function Hero() {
           const scrollDistance = Math.max(0, -rect.top)
           const heroHeight = rect.height || 1000
 
-          // Active range: complete the upward scroll within natural scrolling
-          const activeRange = Math.min(window.innerHeight * 0.75, 480)
+          // Active range: complete upward scroll naturally matching the video
+          const activeRange = Math.min(window.innerHeight * 0.85, 600)
           const rawProgress = Math.min(
             1,
             Math.max(0, scrollDistance / activeRange),
           )
 
-          // Smooth easeOutCubic curve for cinematic transition
+          // Smooth cubic ease curve
           const easedProgress = 1 - Math.pow(1 - rawProgress, 3)
 
-          // FULL scroll-up effect: Temple ascends upward in front of the names
-          const templeLift = easedProgress * (heroHeight * 0.28)
-          // Trees ascend upward
-          const treesLift = easedProgress * (heroHeight * 0.25)
-          const templeScale = 1 + easedProgress * 0.04
+          // Temple ascends upward in front of hero names (text goes behind temple)
+          const templeLift = easedProgress * (heroHeight * 0.16)
+          // Trees stay grounded to seamlessly meet page 2 garland with zero gap
+          const treesLift = easedProgress * (heroHeight * 0.04)
+          const templeScale = 1 + easedProgress * 0.025
 
           hero.style.setProperty(
             "--hero-scroll-progress",
