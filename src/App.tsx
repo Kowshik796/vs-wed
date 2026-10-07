@@ -16,7 +16,7 @@ const CRITICAL_IMAGES = [
   `${A}/60b21.webp`,
   `${A}/a5887.webp`,
   `${A}/f19cc.webp`,
-  `${A}/5d972.webp`,
+  "/Kovil.webp?v=4",
   `${A}/d20fb.webp`,
   `${A}/73f55.webp`,
 ]
@@ -93,18 +93,24 @@ export default function App() {
         Math.max(0, (window.innerHeight - bounds.top) / distance),
       )
 
-      // The exact position shown in the reference image (couple standing on platform)
-      const targetPosition = 0.49
-
-      // Scroll to this position using existing effects, then stop at this point and hold
+      // Smooth descent: guide paper couple and temple down to below the lotus pot at the center
+      const targetPosition = 0.82
       const animProgress = Math.min(targetPosition, rawProgress)
+
+      // Smooth easing curve
+      const normalized = animProgress / targetPosition
+      const eased = normalized * normalized * (3 - 2 * normalized)
+      const travelProgress = eased * targetPosition
 
       section.style.setProperty("--journey-progress", animProgress.toString())
       section.style.setProperty(
         "--couple-travel",
-        `${animProgress * bounds.height * 0.72}px`,
+        `${travelProgress * bounds.height * 0.92}px`,
       )
-      section.style.setProperty("--temple-lift", `${70 - animProgress * 140}px`)
+      section.style.setProperty(
+        "--temple-lift",
+        `${60 - travelProgress * 120}px`,
+      )
       frame = 0
     }
     const requestUpdate = () => {
