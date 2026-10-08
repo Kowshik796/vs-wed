@@ -59,25 +59,13 @@ export default function App() {
   const templeSectionRef = useRef<HTMLElement>(null)
   const event = events[eventIndex]
 
-  // Fast loading: Preload above-the-fold hero images immediately; fetch subsequent pages smoothly without network contention
+  // Fast loading: Preload all critical webp assets immediately on mount for instant zero-latency display
   useEffect(() => {
-    HERO_IMAGES.forEach((src) => {
+    const allImages = [...HERO_IMAGES, ...SUBSEQUENT_IMAGES]
+    allImages.forEach((src) => {
       const img = new Image()
       img.src = src
     })
-
-    const preloadSubsequent = () => {
-      SUBSEQUENT_IMAGES.forEach((src) => {
-        const img = new Image()
-        img.src = src
-      })
-    }
-
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(preloadSubsequent, { timeout: 1200 })
-    } else {
-      setTimeout(preloadSubsequent, 600)
-    }
   }, [])
 
   useEffect(() => {
@@ -109,19 +97,25 @@ export default function App() {
         Math.max(0, (window.innerHeight - bounds.top) / distance),
       )
 
-      // Target position: couple descends and lands exactly in front of the center lotus pot on the floor
-      const targetPosition = 0.52
-      const animProgress = Math.min(targetPosition, rawProgress)
+      // Active descent range: begins when top enters view (0.10) and completes landing at 0.65
+      const startThreshold = 0.1
+      const landingThreshold = 0.65
+      const clamped = Math.min(
+        landingThreshold,
+        Math.max(startThreshold, rawProgress),
+      )
+      const normalized =
+        (clamped - startThreshold) / (landingThreshold - startThreshold)
 
-      // Smooth ease curve for natural descent
-      const normalized = animProgress / targetPosition
+      // Smoothstep easing for silky-smooth descent and gentle landing
       const eased = normalized * normalized * (3 - 2 * normalized)
 
-      // Offset starts higher up and decreases smoothly to 0px, locking couple permanently on courtyard floor
-      const startOffset = bounds.height * 0.32
-      const currentOffset = Math.max(0, (1 - eased) * startOffset)
+      // Total descent from top red mark (top: -4%) down to yellow/red mark under lotus pot (top: 56.4%)
+      // Exactly 0.604 * bounds.height
+      const totalDescent = bounds.height * 0.604
+      const currentOffset = Math.max(0, (1 - eased) * totalDescent)
 
-      section.style.setProperty("--journey-progress", animProgress.toString())
+      section.style.setProperty("--journey-progress", normalized.toFixed(4))
       section.style.setProperty(
         "--couple-offset",
         `${currentOffset.toFixed(1)}px`,

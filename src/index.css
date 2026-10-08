@@ -711,10 +711,10 @@ a:focus-visible,
 
 .paper-couple {
   position: absolute;
-  top: 42.6%;
+  top: 56.4%;
   left: 50%;
   z-index: 3;
-  width: min(639px, 44.47vw);
+  width: min(445px, 31vw);
   filter: drop-shadow(0 16px 18px rgb(63 41 8 / 20%));
   transform: translate(-50%, calc(-1 * var(--couple-offset, 0px)));
   will-change: transform;
@@ -1179,9 +1179,9 @@ a:focus-visible,
   }
 
   .paper-couple {
-    top: 42.6%;
+    top: 56.4%;
     left: 50%;
-    width: 44.47%;
+    width: 44%;
     transform: translate(-50%, calc(-1 * var(--couple-offset, 0px)));
   }
 
