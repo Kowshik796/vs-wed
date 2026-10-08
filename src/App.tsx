@@ -4,11 +4,15 @@ import Hero from "./components/wedding/Hero"
 
 const A = "/assets"
 
-const CRITICAL_IMAGES = [
+const HERO_IMAGES = [
   `${A}/910e4.webp`,
   `${A}/460ba.webp`,
   `${A}/3a4ef.webp`,
   `${A}/1c4aa.webp`,
+  `${A}/73f55.webp`,
+]
+
+const SUBSEQUENT_IMAGES = [
   `${A}/26508.webp`,
   `${A}/f7387.webp`,
   `${A}/bbb98.webp`,
@@ -18,7 +22,6 @@ const CRITICAL_IMAGES = [
   `${A}/f19cc.webp`,
   "/Kovil.webp?v=4",
   `${A}/d20fb.webp`,
-  `${A}/73f55.webp`,
 ]
 
 const events = [
@@ -56,12 +59,25 @@ export default function App() {
   const templeSectionRef = useRef<HTMLElement>(null)
   const event = events[eventIndex]
 
-  // Preload all critical webp assets on mount for zero fetch latency
+  // Fast loading: Preload above-the-fold hero images immediately; fetch subsequent pages smoothly without network contention
   useEffect(() => {
-    CRITICAL_IMAGES.forEach((src) => {
+    HERO_IMAGES.forEach((src) => {
       const img = new Image()
       img.src = src
     })
+
+    const preloadSubsequent = () => {
+      SUBSEQUENT_IMAGES.forEach((src) => {
+        const img = new Image()
+        img.src = src
+      })
+    }
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(preloadSubsequent, { timeout: 1200 })
+    } else {
+      setTimeout(preloadSubsequent, 600)
+    }
   }, [])
 
   useEffect(() => {
@@ -93,24 +109,22 @@ export default function App() {
         Math.max(0, (window.innerHeight - bounds.top) / distance),
       )
 
-      // Smooth descent: guide paper couple and temple down to below the lotus pot at the center
-      const targetPosition = 0.82
+      // Target position: couple descends and lands exactly in front of the center lotus pot on the floor
+      const targetPosition = 0.65
       const animProgress = Math.min(targetPosition, rawProgress)
 
-      // Smooth easing curve
+      // Smooth ease curve for natural descent
       const normalized = animProgress / targetPosition
       const eased = normalized * normalized * (3 - 2 * normalized)
-      const travelProgress = eased * targetPosition
+
+      // Travel factor calibrated to stop exactly at courtyard floor in front of lotus pot (matching reference image)
+      const isMobile = window.innerWidth <= 768
+      const travelFactor = isMobile ? 0.38 : 0.53
+      const maxTravel = bounds.height * travelFactor
 
       section.style.setProperty("--journey-progress", animProgress.toString())
-      section.style.setProperty(
-        "--couple-travel",
-        `${travelProgress * bounds.height * 0.92}px`,
-      )
-      section.style.setProperty(
-        "--temple-lift",
-        `${60 - travelProgress * 120}px`,
-      )
+      section.style.setProperty("--couple-travel", `${eased * maxTravel}px`)
+      section.style.setProperty("--temple-lift", `${25 - eased * 50}px`)
       frame = 0
     }
     const requestUpdate = () => {
@@ -294,22 +308,39 @@ export default function App() {
         ref={templeSectionRef}
         aria-label="Temple illustration"
       >
-        <img className="paper-cloud cloud-one" src={`${A}/42dac.webp`} alt="" />
-        <img className="paper-cloud cloud-two" src={`${A}/923f7.webp`} alt="" />
+        <img
+          className="paper-cloud cloud-one"
+          src={`${A}/42dac.webp`}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          className="paper-cloud cloud-two"
+          src={`${A}/923f7.webp`}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
         <img
           className="paper-cloud cloud-three"
           src={`${A}/923f7.webp`}
           alt=""
+          loading="lazy"
+          decoding="async"
         />
         <img
           className="paper-temple"
           src={`${A}/a5887.webp`}
           alt="A handcrafted temple"
+          loading="lazy"
+          decoding="async"
         />
         <img
           className="paper-couple"
           src={`${A}/f19cc.webp`}
           alt="Bride and groom exchanging garlands"
+          decoding="async"
         />
       </section>
 
