@@ -110,21 +110,22 @@ export default function App() {
       )
 
       // Target position: couple descends and lands exactly in front of the center lotus pot on the floor
-      const targetPosition = 0.65
+      const targetPosition = 0.52
       const animProgress = Math.min(targetPosition, rawProgress)
 
       // Smooth ease curve for natural descent
       const normalized = animProgress / targetPosition
       const eased = normalized * normalized * (3 - 2 * normalized)
 
-      // Travel factor calibrated to stop exactly at courtyard floor in front of lotus pot (matching reference image)
-      const isMobile = window.innerWidth <= 768
-      const travelFactor = isMobile ? 0.38 : 0.53
-      const maxTravel = bounds.height * travelFactor
+      // Offset starts higher up and decreases smoothly to 0px, locking couple permanently on courtyard floor
+      const startOffset = bounds.height * 0.32
+      const currentOffset = Math.max(0, (1 - eased) * startOffset)
 
       section.style.setProperty("--journey-progress", animProgress.toString())
-      section.style.setProperty("--couple-travel", `${eased * maxTravel}px`)
-      section.style.setProperty("--temple-lift", `${25 - eased * 50}px`)
+      section.style.setProperty(
+        "--couple-offset",
+        `${currentOffset.toFixed(1)}px`,
+      )
       frame = 0
     }
     const requestUpdate = () => {

@@ -671,7 +671,7 @@ a:focus-visible,
   height: auto;
   aspect-ratio: 1437 / 2556.656;
   overflow: hidden;
-  background: url("/assets/60b21.webp") center / cover;
+  background: #cba87c url("/assets/60b21.webp") top center / 100% auto no-repeat;
 }
 
 .paper-cloud {
@@ -699,26 +699,24 @@ a:focus-visible,
 }
 
 .paper-temple {
-  position: sticky;
-  top: 0;
-  left: -0.49%;
+  position: absolute;
+  inset: 0;
   z-index: 2;
   display: block;
-  width: 100.97%;
-  height: auto;
-  object-fit: contain;
-  transform-origin: bottom;
-  transform: translateY(var(--temple-lift, 0)) scale(1.035);
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
 }
 
 .paper-couple {
   position: absolute;
-  top: -10.39%;
+  top: 42.6%;
   left: 50%;
   z-index: 3;
   width: min(639px, 44.47vw);
   filter: drop-shadow(0 16px 18px rgb(63 41 8 / 20%));
-  transform: translate(-50%, var(--couple-travel, 0));
+  transform: translate(-50%, calc(-1 * var(--couple-offset, 0px)));
   will-change: transform;
 }
 
@@ -729,8 +727,10 @@ a:focus-visible,
   height: auto;
   aspect-ratio: 1437 / 2556.656;
   overflow: hidden;
+  margin-top: -3px;
   padding: 0;
   background: url("/Kovil.webp?v=4") center / cover;
+  contain: paint;
 }
 
 .story-copy {
@@ -1162,21 +1162,27 @@ a:focus-visible,
   }
 
   .temple-scene {
-    height: 120svh;
-    min-height: 820px;
-    aspect-ratio: auto;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1437 / 2556.656;
+    background: #cba87c url("/assets/60b21.webp") top center / 100% auto no-repeat;
   }
 
   .paper-temple {
-    left: auto;
-    width: 145%;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     max-width: none;
-    margin-left: -22.5%;
+    margin-left: 0;
+    object-fit: fill;
   }
 
   .paper-couple {
-    top: -4%;
-    width: 65vw;
+    top: 42.6%;
+    left: 50%;
+    width: 44.47%;
+    transform: translate(-50%, calc(-1 * var(--couple-offset, 0px)));
   }
 
   .paper-cloud {
@@ -1186,9 +1192,11 @@ a:focus-visible,
   .story {
     min-height: 0;
     aspect-ratio: 470 / 836;
+    margin-top: -3px;
     background-image: url("/Kovil.webp?v=4");
     background-size: cover;
     background-position: center;
+    contain: paint;
   }
 
   .story-copy {
